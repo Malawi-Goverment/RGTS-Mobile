@@ -48,9 +48,7 @@
                 </div>
                 <div class="col-12">
                     <hr>
-                    <div class="row" id="image_canvas">
-                        <!-- <div class="col-4 image_section img img-thumbnail"></div> -->
-                    </div>
+                    
                 </div>
 
 
@@ -102,6 +100,7 @@
                     $("#previewSegment").removeClass('loading')
                     console.log(res)
                     if (res.status == 'success') {
+                        application_of_focus = res.data[0].id
                         renderApplication(res.data[0])
                     }
                 })
@@ -159,10 +158,10 @@
     <div style="z-index: 1500 !important;" class="modal fade" id="captureModal" tabindex="-1" role="dialog"
         aria-labelledby="captureModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="z-index: 20;" role="document">
-            <div class="modal-content" style="z-index: 20;">
+            <div class="modal-content ui segment" style="z-index: 20;" id="capture_modal">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title text-white" id="captureModalLabel">CAPTURED IMAGE</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -185,9 +184,19 @@
                                 class="form-control form-control-lg">
                         </div>
                         <div class="col-12 form-group px-4">
+                            <input type="file" hidden id="imageActual" accept="Image/*">
                             <button type="button" id="captureImageBtn" class="btn btn-lg btn-block btn-danger">
                                 Open Camera <i class="icon camera"></i>
                             </button>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                            <div class="row" id="image_canvas">
+                                <!-- <div class="col-4 image_section img img-thumbnail"></div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button onclick="saveImages()" class="btn btn-md btn-success float-right">Save <i class="icon check circle"></i></button>
                         </div>
                     </div>
                 </div>
