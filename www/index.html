@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGTS Login</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href="./lib/sweetalerts/sweetalert.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/app.css">
+
+    
+</head>
+<body>
+    <div id="wrapper">
+        <header class="ui top attched segment raised p-3 flat m-0">
+            <div class="row">
+                <div class="col-2 sidebutton-container d-none text-center">
+                    <a href="#backButton" class="text-primary header-button">
+                        <i class="icon chevron left"></i>
+                    </a>
+                </div>
+                <div class="col-8 mx-auto text-center">
+                    <h5 class="text-primary">WELCOME</h5>
+                </div>
+                <div class="col-2 sidebutton-container d-none text-center">
+                    <a href="#sideBarButton" class="text-primary header-button">
+                        <i class="icon bars"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main class="p-2 mt-0 container-fluid border border-light">
+            <div class="views row" id="login_view">
+                <div class="col-12 pt-5">
+                    <h1 id="login_title" class="text-primary text-center mx-5">
+                        Please  Sign In
+                    </h1>
+                </div>
+                <div class="col-11 mt-5 mx-auto">
+                    <form class="card ui segment load_segment" autocomplete="false" id="login_form" style="width:100%;">
+                        <div class="card-header bg-primary p-1">
+                            <div class="card-title text-white m-0 p-2">
+                                Authenticate
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="ui form">
+                                <div class="field">
+                                    <input type="text" onkeyup="this.value = this.value.toUpperCase()" name="AccessCode" placeholder="Access Code">
+                                </div>
+                                <div class="field">
+                                    <input type="text" id="password" placeholder="Password" name="Password" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer py-2">
+                            <button type="submit" class="btn float-right btn-primary btn-md">Submit <i class="icon check circle"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Other views Goes Here -->
+        </main>
+    </div>
+    <style>
+        #password { -webkit-text-security: disc; }
+    </style>
+<script src="./js/jquery-1.11.3.min.jsx"></script>
+<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="./lib/semantic/dist/semantic.min.js"></script>
+<script src="./lib/sweetalerts/sweetalert.min.js"></script>
+<script src="./js/app.jsx"></script>
+<script>
+$(document).ready(() => {
+    $("#login_form").submit(e => {
+        e.preventDefault()
+        const credentials = getFormData('login_form')
+
+        const options = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        }
+
+        $("#login_form").addClass('loading')
+        fetch(`${baseURL}/login`, options)
+            .then(res => res.json())
+            .then(res => {
+                swal('', res.message, res.status)
+                if (res.status == 'success') {
+                    localStorage.setItem('userdata', JSON.stringify(res.data))
+                    setTimeout(() => { location.href = "home.html" }, 1000)
+                } else {
+                    $("#login_form").removeClass('loading')
+                    $("#password").val('')
+                }
+            })
+            .catch(err => {
+                $("#login_form").removeClass('loading')
+                swal('Ooops!', 'Something went wrong with this request!', 'error')
+            })
+    })
+})
+</script>
+</body>
+</html>
