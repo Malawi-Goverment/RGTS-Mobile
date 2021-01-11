@@ -6,13 +6,13 @@ $(document).ready(()=>{
             swal('Attention!', 'Please select the type of document you would like to capture!', 'error')
             return
         }
-        //$("#imageActual").click()
-        navigator.camera.getPicture(onSuccess,onFail,{
-            quality:50,
-            allowEdit:true,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            destinationType:Camera.DestinationType.DATA_URL
-        });
+        $("#imageActual").click()
+        // navigator.camera.getPicture(onSuccess,onFail,{
+        //     quality:50,
+        //     allowEdit:true,
+        //     sourceType: Camera.PictureSourceType.CAMERA,
+        //     destinationType:Camera.DestinationType.DATA_URL
+        // });
     });
 
     $("#imageActual").change(function(){
