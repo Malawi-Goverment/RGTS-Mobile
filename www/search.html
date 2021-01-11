@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,52 +11,146 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/app.css">
 
-    
+
 </head>
+
 <body>
+
+
     <div id="wrapper">
-        <header class="ui top attched segment raised p-3 flat m-0">
-            <div class="row">
-                <div class="col-2 sidebutton-container text-center">
-                    <a href="home.html" class="text-primary header-button">
-                        <i class="icon chevron left"></i>
-                    </a>
+        <div class="ui right demo vertical inverted sidebar labeled icon menu">
+            <a class="item">
+                <i class="cog icon"></i>
+                Settings
+            </a>
+
+            <a class="item">
+                <i class="info icon"></i>
+                About
+            </a>
+            <a class="item" onclick="logout()">
+                <i class="lock icon"></i>
+                Logout
+            </a>
+
+        </div>
+        <div class="pusher">
+            <header class="ui top attched segment raised p-3 flat m-0">
+                <div class="row">
+                    <div class="col-2 sidebutton-container text-center">
+                        <a href="home.html" class="text-primary header-button">
+                            <i class="icon close"></i>
+                        </a>
+                    </div>
+                    <div class="col-8 mx-auto text-center">
+                        <h5 class="text-primary">Application List</h5>
+                    </div>
+                    <div class="col-2 sidebutton-container text-center">
+                        <a href="#sideBarButton" data-toggle="modal" data-target="#searchModal" class="text-primary header-button">
+                            <i class="icon search circle"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-8 mx-auto text-center">
-                    <h5 class="text-primary">Search Application</h5>
+            </header>
+            <main class="p-2 mt-0  container-fluid border border-light">
+                <div class="row">
+                    <div class="col-10 mx-auto mb-0 pt-4">
+                        <button onclick="getApplications({})" class="ui fluid button icon circular primary tiny">Refresh Full List <i class="icon refresh"></i></button>
+                        <hr class="p-0 mb-0">
+                    </div>
                 </div>
-                <div class="col-2 sidebutton-container text-center">
-                    <a href="#sideBarButton" class="text-primary header-button">
-                        <i class="icon bars"></i>
-                    </a>
+                <div class="ui segment row " id="applications_segment" 
+                style="background-color: transparent;background: none;border: none;box-shadow: none;">
+                   <!-- APPLICATIONS GOES HERE -->
                 </div>
-            </div>
-        </header>
-        <main class="p-2 mt-0 container-fluid border border-light">
-           
-        </main>
-        <footer class="ui bottom attached segment raised p-3">
-            <div class="row">
-                <div class="col-9">
-                    <p class="text-primary">&copy;2021 - RGTS Entry App</p>
+            </main>
+            <footer class="ui bottom attached segment raised p-3">
+                <div class="row">
+                    <div class="col-9">
+                        <p class="text-primary">&copy;2021 - RGTS Entry App</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="text-primary">V 1.0</p>
+                    </div>
                 </div>
-                <div class="col-3 text-right">
-                    <p class="text-primary">V 1.0</p>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
-<script src="./js/jquery-1.11.3.min.jsx"></script>
-<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="./lib/semantic/dist/semantic.min.js"></script>
-<script src="./lib/sweetalerts/sweetalert.min.js"></script>
-<script src="./js/app.jsx"></script>
-<script src="./js/applications.js"></script>
-<script>
-    $(document).ready(()=>{
-        setUserData();
-    })
-</script>
+    <style>
+        .col-12 ._time{
+            font-family: 6px !important;
+        }
+        .col-12 ._applicant{
+            font-family: Roboto;
+            text-transform: capitalize !important;
+            color: teal;
+        }
+        .ui.button#fab{
+            float:right !important;
+            position: fixed !important;
+        }
+    </style>
+    <script src="./js/jquery-1.11.3.min.jsx"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./lib/semantic/dist/semantic.min.js"></script>
+    <script src="./lib/sweetalerts/sweetalert.min.js"></script>
+    <script src="./js/app.jsx"></script>
+    <script src="./js/applications.jsx"></script>
+    <script>
+        $(document).ready(() => {
+            setUserData();
+        })
+    </script>
+
+<div style="z-index: 1500 !important;" class="modal fade" id="searchModal" tabindex="-1" role="dialog"
+aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="z-index: 20;" role="document">
+    <div class="modal-content ui segment" style="z-index: 20;" id="capture_modal">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-white" id="searchModalLabel">SEARCH APPLICATION</h5>
+            <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="searchForm" class="ui form">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <input type="text" name="ReferenceID" placeholder="Reference ID" class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="text" name="ApplicantFullName" placeholder="Applicant Name" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-12 form-group">
+                        <select name="ServiceAppliedFor" id="services" class="form-control ui dropdown form-control-lg">
+                            <option value="">Service Applied</option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group">
+                        <select name="ProgressStage" id="stages" class="form-control ui dropdown form-control-lg">
+                            <option value="">Stage</option>
+                            <option value="ASSIGNMENT">ASSIGNMENT</option>
+                            <option value="EXAMINATION">EXAMINATION</option>
+                            <option value="AUTHORIZATION">AUTHORIZATION</option>
+                            <option value="PRINTING">PRINTING</option>
+                            <option value="COMPLETE">COMPLETE</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Search Now <i class="icon search circle"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
 
 </body>
+<script>
+    
+</script>
+
 </html>

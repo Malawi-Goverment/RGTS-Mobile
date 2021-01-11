@@ -3,7 +3,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     console.log(navigator.camera);
 }
-const baseURL = "http://192.168.8.103:5000"
+const baseURL = "http://192.168.1.103:5000"
 function setUserData(){
     try{
         userdata = JSON.parse(localStorage.getItem('userdata'))
@@ -26,6 +26,11 @@ function getFormData(form) {
     return json_obj;
 }
 
+
+function logout(){
+  localStorage.clear()
+  location.href="index.html"
+}
 
 
 function readURL2(input) {
@@ -160,3 +165,40 @@ function readURL2(input) {
       $(this).val("+265");
     }
   });
+
+  function pushAside(){
+    $('.ui.labeled.icon.sidebar').sidebar('toggle');
+  }
+
+  
+function getServices() {
+  fetch(`${baseURL}/application/services`)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status == "success") {
+        let options = res.data.map((service) => {
+          return `<option value="${service.id}">${service.ServiceName}</option>`;
+        });
+        options = `<option value=''>Service Applied</option>${options.join(
+          ""
+        )}`;
+        $("#services").html(options);
+      } else {
+        console.log("Failed to fetch services!\nRetrying in 5 seconds...");
+      }
+    })
+    .catch((err) => {
+      $("#feedbackText").html(`  Failed to fetch services <br>
+                   Retrying in <span id="countDown"></span> seconds...`);
+      let wait = 5;
+      let Interval = setInterval(() => {
+        if (wait >= 0) {
+          $("#countDown").html(wait);
+        } else {
+          $("#feedbackText").html("");
+          clearInterval(Interval);
+        }
+        wait--;
+      }, 1000);
+    });
+}

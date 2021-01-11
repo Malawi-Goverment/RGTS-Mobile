@@ -16,66 +16,84 @@
 
 <body>
     <div id="wrapper">
-        <header class="ui top attched segment raised p-3 flat m-0">
-            <div class="row">
-                <div class="col-2 sidebutton-container  text-center">
-                    <a href="home.html" class="text-primary header-button">
-                        <i class="icon chevron left"></i>
-                    </a>
-                </div>
-                <div class="col-8 mx-auto text-center">
-                    <h5 class="text-primary">View ( <span class="display_ref_id"></span> )</h5>
-                </div>
-                <div class="col-2 sidebutton-container text-center">
-                    <a href="#sideBarButton" class="text-primary header-button">
-                        <i class="icon bars"></i>
-                    </a>
-                </div>
-            </div>
-        </header>
-        <main class="p-2 mt-0 container-fluid border border-light">
-            <div class="row">
-                <div class="col-10 mx-auto card ui segment" id="previewSegment">
-                    <table class="table card-body">
+        <div class="ui right demo vertical inverted sidebar labeled icon menu">
+            <a class="item">
+                <i class="cog icon"></i>
+                Settings
+            </a>
 
-                    </table>
+            <a class="item">
+                <i class="info icon"></i>
+                About
+            </a>
+            <a class="item" onclick="logout()">
+                <i class="lock icon"></i>
+                Logout
+            </a>
+
+        </div>
+        <div class="pusher">
+            <header class="ui top attched segment raised p-3 flat m-0">
+                <div class="row">
+                    <div class="col-2 sidebutton-container  text-center">
+                        <a href="home.html" class="text-primary header-button">
+                            <i class="icon chevron left"></i>
+                        </a>
+                    </div>
+                    <div class="col-8 mx-auto text-center">
+                        <h5 class="text-primary">View ( <span class="display_ref_id"></span> )</h5>
+                    </div>
+                    <div class="col-2 sidebutton-container text-center">
+                        <a href="#sideBarButton" onclick="pushAside()" class="text-primary header-button">
+                            <i class="icon bars"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-10 mx-auto">
-                    <button data-target="#captureModal" data-toggle="modal" data-backdrop="static"
-                        class="ui button icon medium fluid positive circular">
-                        Upload Image
-                    </button>
-                </div>
-                <div class="col-12">
-                    <hr>
-                    
-                </div>
+            </header>
+            <main class="p-2 mt-0 container-fluid border border-light">
+                <div class="row">
+                    <div class="col-10 mx-auto card ui segment" id="previewSegment">
+                        <table class="table card-body">
+
+                        </table>
+                    </div>
+                    <div class="col-10 mx-auto">
+                        <button data-target="#captureModal" data-toggle="modal" data-backdrop="static"
+                            class="ui button icon medium fluid positive circular">
+                            Upload Image
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+
+                    </div>
 
 
-            </div>
-        </main>
-        <footer class="ui bottom attached segment raised p-3">
-            <div class="row">
-                <div class="col-9">
-                    <p class="text-primary">&copy;2021 - RGTS Entry App</p>
                 </div>
-                <div class="col-3 text-right">
-                    <p class="text-primary">V 1.0</p>
+            </main>
+            <footer class="ui bottom attached segment raised p-3">
+                <div class="row">
+                    <div class="col-9">
+                        <p class="text-primary">&copy;2021 - RGTS Entry App</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="text-primary">V 1.0</p>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
-        <style>
-             .col-4.image_section {
-                width: 100%;
-                height: 13vh;
-                margin: .4em;
-                background-position: top center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-clip: content-box;
-            }
-        </style>
+    <style>
+        .col-4.image_section {
+            width: 100%;
+            height: 13vh;
+            margin: .4em;
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-clip: content-box;
+        }
+    </style>
     <script src="./js/jquery-1.11.3.min.jsx"></script>
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="./lib/semantic/dist/semantic.min.js"></script>
@@ -161,7 +179,8 @@
             <div class="modal-content ui segment" style="z-index: 20;" id="capture_modal">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title text-white" id="captureModalLabel">CAPTURED IMAGE</h5>
-                    <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -196,7 +215,8 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button onclick="saveImages()" class="btn btn-md btn-success float-right">Save <i class="icon check circle"></i></button>
+                            <button onclick="saveImages()" class="btn btn-md btn-success float-right">Save <i
+                                    class="icon check circle"></i></button>
                         </div>
                     </div>
                 </div>
