@@ -73,7 +73,7 @@ xmlns:cdv="http://cordova.apache.org/ns/1.0">
 
 	<platform name="android">
 	    <allow-intent href="market:*" />
-	    <icon density="hdpi" src="res/mipmap-hdpi/ic_launcher.png" />
+	    <!-- <icon density="hdpi" src="res/mipmap-hdpi/ic_launcher.png" /> -->
 	    <icon density="mdpi" src="res/mipmap-mdpi/ic_launcher.png" />
 	    <icon density="xhdpi" src="res/mipmap-xhdpi/ic_launcher.png" />
 	    <icon density="xxhdpi" src="res/mipmap-xxhdpi/ic_launcher.png" />
