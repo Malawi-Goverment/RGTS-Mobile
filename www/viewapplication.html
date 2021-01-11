@@ -100,7 +100,7 @@
                     $("#previewSegment").removeClass('loading')
                     console.log(res)
                     if (res.status == 'success') {
-                        application_of_focus = res.data[0].id
+                        application_of_focus = res.data[0].application_id
                         renderApplication(res.data[0])
                     }
                 })
