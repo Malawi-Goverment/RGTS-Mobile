@@ -1,7 +1,8 @@
-let userdata
+let userdata, pictureSource, destinationType
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-    console.log(navigator.camera);
+    pictureSource = navigator.camera.PictureSourceType,
+    destinationType = navigator.camera.destinationType
 }
 const baseURL = "http://192.168.1.103:5000"
 function setUserData(){
