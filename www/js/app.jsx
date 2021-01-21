@@ -4,7 +4,7 @@ function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType,
     destinationType = navigator.camera.destinationType
 }
-const baseURL = "http://192.168.1.103:5000"
+const baseURL = "http://192.168.100.2"
 function setUserData(){
     try{
         userdata = JSON.parse(localStorage.getItem('userdata'))
