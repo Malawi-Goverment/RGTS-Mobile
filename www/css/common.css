@@ -1,0 +1,57 @@
+body{
+ margin: 0;
+ padding: 0;
+ font-family: Roboto !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+#applications_list_view{
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+.bg-theme{
+    background-color: #b1b9b4 !important;
+}
+
+.text-theme{
+    color:#025121 !important;
+}
+
+#login_view, #main_view{
+    height: 100vh !important;
+    margin:0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+}
+
+.form-control.password_field { -webkit-text-security: disc; }
+
+.flat{
+    border-radius: 0 !important;
+}
+
+table thead th{
+    color:white;
+}
+.col-4.image_section {
+    width: 100%;
+    height: 13vh;
+    margin: .4em;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+}
+
+.col-12 ._time{
+    font-family: 6px !important;
+}
+.col-12 ._applicant{
+    font-family: Roboto;
+    text-transform: capitalize !important;
+    color: teal;
+}

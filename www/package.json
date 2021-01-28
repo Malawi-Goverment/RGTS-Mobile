@@ -1,0 +1,25 @@
+{
+  "name": "nasfam_sales_app",
+  "version": "1.0.0",
+  "description": "MObile application for recording Nasfam products sales",
+  "main": "index.html",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "materialize-css": "^1.0.0-rc.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "run"
+  },
+  "keywords": [
+    "NASFAM",
+    "SALES",
+    "CLIFFORD",
+    "MANAGEMENT"
+  ],
+  "author": "Clifford P. Mwale (+265994791131)",
+  "license": "MIT"
+}

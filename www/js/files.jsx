@@ -1,18 +1,23 @@
 let images_array = []
 let application_of_focus
+let pictureSource
+let DestinationType
+
+document.addEventListener('deviceready', onDeviceReady, false);
+
+function onDeviceReady(){
+  pictureSource = navigator.Camera.PictureSourceType;
+  destinationType = navigator.Camera.DestinationType;
+}
+
 $(document).ready(()=>{
     $("#captureImageBtn").click(()=>{
         if($("#document_to_view").val() == ""){
             swal('Attention!', 'Please select the type of document you would like to capture!', 'error')
             return
         }
-        $("#imageActual").click()
-        // navigator.camera.getPicture(onSuccess,onFail,{
-        //     quality:50,
-        //     allowEdit:true,
-        //     sourceType: Camera.PictureSourceType.CAMERA,
-        //     destinationType:Camera.DestinationType.DATA_URL
-        // });
+       // $("#imageActual").click()
+       getPhoto()
     });
 
     $("#imageActual").change(function(){
@@ -26,6 +31,29 @@ $(document).ready(()=>{
     })
 
 })
+
+function onPhotoURLSuccess(ImageURL){
+  const payload = {
+    document_type: $("#document_to_view").val(),
+    subtitle:$("#document_subtitle").val(),
+    file:`data:image/jpeg;base64,${ImageURL}`
+  }
+  images_array.push(payload);
+  renderImages();
+}
+
+function onFail(){
+  swal('Oops!','Failed to capture image device!', 'error')
+}
+
+function getPhoto(){
+  navigator.camera.getPicture(onPhotoURLSuccess,onFail,{
+            quality:100,
+            allowEdit:true,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType:Camera.DestinationType.DATA_URL
+      });
+}
 
 function readURL2(input) {
     if (input.files.length > 0 && input.files.length <= 4) {

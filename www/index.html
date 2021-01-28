@@ -3,109 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RGTS Login</title>
-    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <title>DRG Entry App</title>
+    <!-- <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./lib/semantic/dist/semantic.min.css">
     <link rel="stylesheet" href="./lib/sweetalerts/sweetalert.css">
+    <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/fonts.css">
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/fab.css">
 
-    
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="./node_modules/materialize-css/dist/js/materialize.min.js"></script> -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./lib/semantic/dist/semantic.min.js"></script>
+    <script src="./lib/sweetalerts/sweetalert.min.js"></script>
+    <script src="./js/services.jsx"></script>
 </head>
 <body>
-    <div id="wrapper">
-        <header class="ui top attached segment raised p-3 flat m-0">
-            <div class="row">
-                <div class="col-2 sidebutton-container d-none text-center">
-                    <a href="#backButton" class="text-primary header-button">
-                        <i class="icon chevron left"></i>
-                    </a>
-                </div>
-                <div class="col-8 mx-auto text-center">
-                    <h5 class="text-primary">WELCOME</h5>
-                </div>
-                <div class="col-2 sidebutton-container d-none text-center">
-                    <a href="#sideBarButton" class="text-primary header-button">
-                        <i class="icon bars"></i>
-                    </a>
-                </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-3   bg-theme " id="login_view">
+               <form class="row" id="login_form">
+                   <div class="text-center col-12 mt-3">
+                    <div class="ui small image circular">
+                        <img src="./assets/icon.png" alt="" class="img img-thumbnail">
+                    </div>
+                    <h1 id="title" class="text-white text-center">Please Sign In</h1>
+                    <hr class="bg-light mx-3">
+                   </div>
+                   <div class="col-12">
+                       <div class="form-row">
+                           <div class="col-11 mt-2 mx-auto form-group">
+                               <label for="" class="text-white">Access Code</label>
+                               <input onkeyup="this.value = this.value.toUpperCase()" type="text" name="AccessCode" placeholder="e.g JDOE123" class="no-space form-control form-control-lg" required/>
+                           </div>
+                           <div class="col-11 mx-auto form-group">
+                            <label for="" class="text-white">Password</label>
+                            <input type="text" id="Password" name="Password" placeholder="(Required)" class="form-control password_field form-control-lg" required/>
+                        </div>
+                       </div>
+                   </div>
+                   <div class="col-12">
+                       <div class="form-row mt-5">
+                           <div class="form-group col-11 mx-auto" >
+                               <button id="loginBtn" type="submit" class="ui button negative medium icon fluid">Sign In</button>
+                           </div>
+                       </div>
+                   </div>
+                </form>
+
+                
             </div>
-        </header>
-        <main class="p-2 mt-0 container-fluid border border-light">
-            <div class="views row" id="login_view">
-                <div class="col-12 pt-5">
-                    <h1 id="login_title" class="text-primary text-center mx-5">
-                        Please  Sign In
-                    </h1>
+            <!-- MAIN VIEW START -->
+
+            <div class="col-12 px-0 d-none" id="main_view">
+                <header class="ui top attached segment bg-success raised p-3 flat m-0">
+                    <div class="row">
+                        <div class="col-2 sidebutton-container  text-center">
+                            <a href="#backButton" id="backButton" onclick="changeView('home_view', 'Home', false)" class="text-white d-none header-button">
+                                <i class="icon chevron left"></i>
+                            </a>
+                        </div>
+                        <div class="col-8 mx-auto text-center">
+                            <h5 class="text-white" id="headerTitle">Home</h5>
+                        </div>
+                        <div class="col-2 sidebutton-container text-center">
+                            <a href="#sideBarButton" onclick="logout()" class="text-white header-button">
+                                <i class="icon bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                </header>
+                <div class="container views " id="home_view">
+                    <div class="row mt-5 p-4">
+                        <a class="col-6 mx-auto" onclick="changeView('register_view', 'Register Application')">
+                            <div class="ui raised segment tab_segment text-center">
+                                <p class="text-primary">Create <br> Application</p>
+                                <div class="ui image tiny">
+                                    <img src="./assets/create_100px.png" alt="Create">
+                                </div>
+                            </div>
+                        </a>
+                        <a onclick="changeView('applications_list_view', 'Applications List')" class="col-6 mx-auto">
+                            <div class="ui raised segment tab_segment text-center">
+                                <p class="text-primary">Search <br> Application</p>
+                                <div class="ui image tiny">
+                                    <img src="./assets/search_database_100px.png" alt="Search">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="col-12 mt-4">
+                            <div class="ui raised segment tab_segment text-center">
+                                <p> <span class="text-danger">NOTE:</span> This application is is property of The Malawi Government Registrar General's Office.
+                                    Unauthorized use and installation will render the subject liable for prosecution!</p>
+                                    <hr>
+                                    <p>Please report any persons in posession of this Application.</p>
+                                </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-11 mt-5 mx-auto">
-                    <form class="card ui segment load_segment" autocomplete="false" id="login_form" style="width:100%;">
-                        <div class="card-header bg-primary p-1">
-                            <div class="card-title text-white m-0 p-2">
-                                Authenticate
-                            </div>
+                <div class="views d-none" id="register_view">
+                    <div class="row">
+                        <div class="col-12 pt-5 px-4">
+                         <h1 class="text-dark m-3">Registry <i class="icon edit circle"></i></h1>
+                         <form action="#" class="card segment ui" id="new_application_form" style="width:100%;">
+                             <div class="card-header bg-dark ">
+                                 <div class="card-title text-white p-0 m-0">SERVICE APPLICATION</div>
+                             </div>
+                          <div class="form-row card-body">
+                              <div class="col-12 form-group">
+                                  <input type="text" onkeyup="this.value = this.value.toUpperCase()"
+                                      placeholder="Applicant Full Name" name="FullName" class="form-control form-control-lg"
+                                      required />
+                              </div>
+                              <div class="col-4 form-group">
+                                  <select name="Gender" class="form-control form-control-lg" required>
+                                      <option value="">Gender</option>
+                                      <option value="MALE">MALE</option>
+                                      <option value="FEMALE">FEMALE</option>
+                                      <option value="OTHER">OTHER</option>
+                                  </select>
+                              </div>
+                              <div class="col-8 form-group">
+                                  <input type="tel" value="+265" name="Phone"
+                                      class="phone-field form-control form-control-lg">
+                              </div>
+                              <div class="col-12 form-group">
+                                  <input onkeyup="this.value = this.value.toLowerCase()" type="Email" name="EmailAddress" placeholder="Email Address"
+                                      class="form-control form-control-lg">
+                              </div>
+                              <div class="col-12 form-group">
+                                  <select name="Service"  class="services form-control form-control-lg" required>
+                                      <option value="">Service Applied</option>
+                                     
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <button type="submit" class="button btn btn-success btn-block btn-lg">
+                                  Submit <i class="icon check circle"></i> 
+                              </button>
+                          </div>
+                         </form>
                         </div>
-                        <div class="card-body">
-                            <div class="ui form">
-                                <div class="field">
-                                    <input type="text" onkeyup="this.value = this.value.toUpperCase()" name="AccessCode" placeholder="Access Code">
-                                </div>
-                                <div class="field">
-                                    <input type="text" id="password" placeholder="Password" name="Password" id="">
-                                </div>
-                            </div>
+                        <div class="col-12 text-center pt-3">
+                            <p class="text-danger" id="feedbackText">
+                              
+                            </p>
                         </div>
-                        <div class="card-footer py-2">
-                            <button type="submit" class="btn float-right btn-primary btn-md">Submit <i class="icon check circle"></i></button>
+                        <div class="col-12">
+                         <button hidden data-toggle="modal" id="launchSuccessModal" data-target="#viewRecentModal" data-backdrop="static">Hidden</button>
+         
+                         <div class="modal fade" id="viewRecentModal" tabindex="-1" role="dialog"
+                         aria-labelledby="viewRecentModalLabel" aria-hidden="true">
+                         <div class="modal-dialog" role="document">
+                             <form class="modal-content">
+                                 <div class="modal-header bg-primary">
+                                     <h5 class="modal-title text-white" id="viewRecentModalLabel">Success Alert!</h5>
+                                     <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                     </button>
+                                 </div>
+                                 <div class="modal-body">
+                                     <div class="form-row">
+                                         <div class="col-8 mx-auto">
+                                             <button onclick="prepareNavigation()" class="btn btn-lg btn-block">View This Application</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                      </div>
                         </div>
-                    </form>
+                    </div>
+         
+                    
+                </div>
+                <div class="container-fluid views d-none" id="applications_list_view">
+                    <div class="row">
+                        <div class="col-10 mx-auto mb-0 pt-4">
+                            <button onclick="getApplications({})" class="ui fluid button icon circular primary tiny">Refresh Full List <i class="icon refresh"></i></button>
+                            <hr class="p-0 mb-0">
+                        </div>
+                    </div>
+                    <div class="ui segment row " id="applications_segment" 
+                    style="background-color: transparent;background: none;border: none;box-shadow: none;">
+                       <!-- APPLICATIONS GOES HERE -->
+                    </div>
+                </div>
+                <div class="container-fluid views d-none" id="application_view">
+                    <div class="row">
+                        <div class="col-11 text-center ui mt-5 raised segment mx-auto">
+                            <h3 style="font-family: orbitron;" class="text-danger" id="id_display"></h3>
+                        </div>
+                        <div class="col-11 mx-auto raised segment ui segment" id="previewSegment">
+                            <table class="table">
+    
+                            </table>
+                        </div>
+                        <div class="col-10 mx-auto">
+                            <button data-target="#captureModal" data-toggle="modal" data-backdrop="static"
+                                class="ui button icon medium fluid positive circular">
+                                Upload Image
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+    
+                        </div>
+    
+    
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Other views Goes Here -->
-        </main>
+            <!-- MAIN VIEW END -->
+        </div>
     </div>
-    <style>
-        #password { -webkit-text-security: disc; }
-    </style>
-<script src="./js/jquery-1.11.3.min.jsx"></script>
-<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="./lib/semantic/dist/semantic.min.js"></script>
-<script src="./lib/sweetalerts/sweetalert.min.js"></script>
-<script src="./js/app.jsx"></script>
-<script>
-$(document).ready(() => {
-    $("#login_form").submit(e => {
-        e.preventDefault()
-        const credentials = getFormData('login_form')
 
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }
 
-        $("#login_form").addClass('loading')
-        fetch(`${baseURL}/login`, options)
-            .then(res => res.json())
-            .then(res => {
-                swal('', res.message, res.status)
-                if (res.status == 'success') {
-                    localStorage.setItem('userdata', JSON.stringify(res.data))
-                    setTimeout(() => { location.href = "home.html" }, 1000)
-                } else {
-                    $("#login_form").removeClass('loading')
-                    $("#password").val('')
-                }
-            })
-            .catch(err => {
-                $("#login_form").removeClass('loading')
-                swal('Ooops!', 'Something went wrong with this request!', 'error')
-            })
-    })
-})
-</script>
+    <!-- SEARC APPLICATION MODAL START -->
+
+    
+<div style="z-index: 1500 !important;" class="modal fade" id="searchModal" tabindex="-1" role="dialog"
+aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="z-index: 20;" role="document">
+    <div class="modal-content ui segment" style="z-index: 20;" id="capture_modal">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title text-white" id="searchModalLabel">SEARCH APPLICATION</h5>
+            <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="searchForm" class="ui form">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <input type="text" name="ReferenceID" placeholder="Reference ID" class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="text" name="ApplicantFullName" placeholder="Applicant Name" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-12 form-group">
+                        <select name="ServiceAppliedFor"  class="services form-control ui dropdown form-control-lg">
+                            <option value="">Service Applied</option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group">
+                        <select name="ProgressStage" id="stages" class="form-control ui dropdown form-control-lg">
+                            <option value="">Stage</option>
+                            <option value="ASSIGNMENT">ASSIGNMENT</option>
+                            <option value="EXAMINATION">EXAMINATION</option>
+                            <option value="AUTHORIZATION">AUTHORIZATION</option>
+                            <option value="PRINTING">PRINTING</option>
+                            <option value="COMPLETE">COMPLETE</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Search Now <i class="icon search circle"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- IMAGE CAPTURE MODAL START -->
+
+<div style="z-index: 1500 !important;" class="modal fade" id="captureModal" tabindex="-1" role="dialog"
+        aria-labelledby="captureModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="z-index: 20;" role="document">
+            <div class="modal-content ui segment" style="z-index: 20;" id="capture_modal">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="captureModalLabel">CAPTURED IMAGE</h5>
+                    <button type="button" id="closeModalBtn" class="close text-white" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-12 form-group px-4">
+                            <label for="">Select Document Type:</label>
+                            <select id="document_to_view" class="form-control form-control-lg">
+                                <option value="">SELECT</option>
+                                <option value="APPLICATION_FORM">APPLICATION FORM</option>
+                                <option value="PAYMENT_RECEIPT">PAYMENT RECEIPT</option>
+                                <option value="GENERAL_RECEIPT">GENERAL RECEIPT</option>
+                                <option value="NATIONAL_ID">NATIONAL ID</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group px-4">
+                            <label for="">SubTitle</label>
+                            <input type="text" id="document_subtitle" placeholder="e.g Page 1/BackPage"
+                                class="form-control form-control-lg">
+                        </div>
+                        <div class="col-12 form-group px-4">
+                            <input type="file" hidden id="imageActual" accept="Image/*">
+                            <button type="button" id="captureImageBtn" class="btn btn-lg btn-block btn-danger">
+                                Pick File <i class="icon camera"></i>
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <hr>
+                            <div class="row" id="image_canvas">
+                                <!-- <div class="col-4 image_section img img-thumbnail"></div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button onclick="saveImages()" class="btn btn-md btn-success float-right">Save <i
+                                    class="icon check circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<!-- IMAGE CAPTURE MODAL END -->
+
+    <!-- SEARCH APPLICATION MODAL END -->
 </body>
+<script src="./js/create.jsx"></script>
+<script src="./js/login.jsx"></script>
+<script src="./js/applications.jsx"></script>
+<script src="./js/files.jsx"></script>
 </html>
