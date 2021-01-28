@@ -1,6 +1,6 @@
 "use strict";
 const baseURL = `http://172.20.229.145:5000`;
-document.addEventListener('backbutton', backButton(), false)
+
 let current_view = "home_view";
 $(document).ready(() => {
   

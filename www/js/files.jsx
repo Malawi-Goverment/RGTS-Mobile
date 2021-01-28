@@ -8,6 +8,8 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady(){
   pictureSource = navigator.Camera.PictureSourceType;
   destinationType = navigator.Camera.DestinationType;
+  document.addEventListener('backbutton', backButton(), false)
+
 }
 
 $(document).ready(()=>{
