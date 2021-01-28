@@ -18,7 +18,6 @@ xmlns:cdv="http://cordova.apache.org/ns/1.0">
 <plugin name="cordova-plugin-statusbar" />
 <plugin name="cordova-plugin-device" />
 <plugin name="cordova-plugin-whitelist" />
-
 <plugin name="cordova-plugin-camera" spec="4.1.0" />
 <plugin name="cordova-plugin-backbutton" />
 <plugin name="cordova-plugin-splashscreen" />

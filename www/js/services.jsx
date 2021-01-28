@@ -1,5 +1,5 @@
 "use strict";
-const baseURL = `http://172.20.229.145:5000`;
+const baseURL = `http://172.20.10.2:5000`;
 
 let current_view = "home_view";
 $(document).ready(() => {
